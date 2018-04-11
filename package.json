@@ -1,7 +1,7 @@
 {
   "name": "htmlboilerplate",
   "version": "2.1",
-  "description": "Start push + sass template",
+  "description": "Start pug(jade) + sass template",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
