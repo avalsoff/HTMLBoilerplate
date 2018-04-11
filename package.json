@@ -1,13 +1,21 @@
 {
   "name": "htmlboilerplate",
-  "version": "2.1",
-  "description": "Start pug(jade) + sass template",
+  "version": "2.1.0",
+  "description": "Frontend start template with sass and pug",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avalsoff/HTMLBoilerplate.git"
+  },
   "author": "avalsoff",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avalsoff/HTMLBoilerplate/issues"
+  },
+  "homepage": "https://github.com/avalsoff/HTMLBoilerplate#readme",
   "devDependencies": {
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
@@ -19,8 +27,5 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0"
-  },
-  "dependencies": {
-    "npm": "^5.8.0"
   }
 }
