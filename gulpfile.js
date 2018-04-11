@@ -15,7 +15,7 @@ const cache         = require('gulp-cache');
 gulp.task('browser-sync', function() {
   browsersync({
     server: {
-      baseDir: 'build'
+      baseDir: 'src'
     },
     notify: false,
     // open: false,
@@ -55,11 +55,11 @@ gulp.task('js', ['index-js'], function() {
 });
 
 gulp.task('pug', function() {
-  return gulp.src('src/pug/**/*.pug')
+  return gulp.src('src/views/**/!(_)*.pug')
   .pipe(pug({
     pretty: true
   }))
-  .pipe(gulp.dest('src/html'))
+  .pipe(gulp.dest('src'))
   .pipe(browsersync.reload( {stream: true} ))
 });
 
@@ -76,8 +76,8 @@ gulp.task('build', ['removebuild', 'imagemin', 'pug', 'sass', 'js'], function() 
     ]).pipe(gulp.dest('build'));
 
   var buildHtml = gulp.src([
-    'src/pug/**/*',
-  ]).pipe(gulp.dest('build/html'));
+    'src/*.html',
+  ]).pipe(gulp.dest('build'));
 
   var buildCss = gulp.src([
     'src/css/main.min.css',
@@ -93,7 +93,7 @@ gulp.task('build', ['removebuild', 'imagemin', 'pug', 'sass', 'js'], function() 
 });
 
 gulp.task('watch', ['pug', 'sass', 'js', 'browser-sync'], function() {
-  gulp.watch('src/pug/**/*.pug', ['pug']);
+  gulp.watch('src/views/**/*.pug', ['pug']);
   gulp.watch('src/sass/**/*.sass', ['sass']);
   gulp.watch(['libs/**/*.js', 'src/js/index.js'], ['js']);
 });

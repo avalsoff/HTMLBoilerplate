@@ -1,5 +1,5 @@
 $(function() {
 
-	// Custom JS
+	alert("Hello world");
 
 });
