@@ -1,7 +1,4 @@
-var syntax        = 'sass'; // Syntax: sass or scss;
-
 const gulp          = require('gulp');
-const gutil         = require('gulp-util' );
 const sass          = require('gulp-sass');
 const browsersync   = require('browser-sync');
 const concat        = require('gulp-concat');
@@ -11,7 +8,9 @@ const rename        = require('gulp-rename');
 const autoprefixer  = require('gulp-autoprefixer');
 const notify        = require("gulp-notify");
 const pug           = require('gulp-pug');
-
+const imagemin      = require('gulp-imagemin');
+const del           = require('del');
+const cache         = require('gulp-cache');
 
 gulp.task('browser-sync', function() {
   browsersync({
@@ -25,52 +24,81 @@ gulp.task('browser-sync', function() {
   })
 });
 
-gulp.task('styles', function() {
+gulp.task('sass', function() {
   return gulp.src('src/'+syntax+'/**/*.'+syntax+'')
   .pipe(sass({ outputStyle: 'expand' }).on("error", notify.onError()))
   .pipe(rename({ suffix: '.min', prefix : '' }))
   .pipe(autoprefixer(['last 15 versions']))
   // .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
-  .pipe(gulp.dest('build/css'))
+  .pipe(gulp.dest('src/css'))
   .pipe(browsersync.reload( {stream: true} ))
 });
 
-gulp.task('js', function() {
+gulp.task('index-js', function() {
+  return gulp.src([
+    'src/js/index.js',
+    ])
+  .pipe(concat('index.min.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest('src/js'));
+});
+
+gulp.task('js', ['index-js'], function() {
   return gulp.src([
     'src/libs/jquery/dist/jquery.min.js',
-    'src/js/common.js', // Always at the end
+    'src/js/index.min.js', // Always at the end
     ])
   .pipe(concat('scripts.min.js'))
   // .pipe(uglify()) // Mifify js (opt.)
-  .pipe(gulp.dest('build/js'))
+  .pipe(gulp.dest('src/js'))
   .pipe(browsersync.reload({ stream: true }))
 });
 
-gulp.task('html', function() {
+gulp.task('pug', function() {
   return gulp.src('src/pug/**/*.pug')
   .pipe(pug({
     pretty: true
   }))
-  .pipe(gulp.dest('build'))
+  .pipe(gulp.dest('src/html'))
   .pipe(browsersync.reload( {stream: true} ))
 });
 
-gulp.task('fonts', function() {
-  return gulp.src('src/fonts/**/*')
-  .pipe(gulp.dest('build/fonts'))
-  .pipe(browsersync.reload( {stream: true} ))
-});
-
-gulp.task('images', function() {
+gulp.task('imagemin', function() {
   return gulp.src('src/img/**/*')
-  .pipe(gulp.dest('build/img'))
-  .pipe(browsersync.reload( {stream: true} ))
+  .pipe(cache(imagemin()))
+  .pipe(gulp.dest('build/img')); 
 });
 
-gulp.task('watch', ['html', 'styles', 'js', 'browser-sync'], function() {
-  gulp.watch('src/'+syntax+'/**/*.'+syntax+'', ['styles']);
-  gulp.watch(['libs/**/*.js', 'src/js/common.js'], ['js']);
-  gulp.watch('src/pug/**/*.pug', ['html']);
+gulp.task('build', ['removebuild', 'imagemin', 'pug', 'sass', 'js'], function() {
+
+  var buildFiles = gulp.src([
+    'src/.htaccess',
+    ]).pipe(gulp.dest('build'));
+
+  var buildHtml = gulp.src([
+    'src/pug/**/*',
+  ]).pipe(gulp.dest('build/html'));
+
+  var buildCss = gulp.src([
+    'src/css/main.min.css',
+    ]).pipe(gulp.dest('build/css'));
+
+  var buildJs = gulp.src([
+    'src/js/scripts.min.js',
+    ]).pipe(gulp.dest('build/js'));
+
+  var buildFonts = gulp.src([
+    'src/fonts/**/*',
+    ]).pipe(gulp.dest('build/fonts'));
 });
+
+gulp.task('watch', ['pug', 'sass', 'js', 'browser-sync'], function() {
+  gulp.watch('src/pug/**/*.pug', ['pug']);
+  gulp.watch('src/sass/**/*.sass', ['sass']);
+  gulp.watch(['libs/**/*.js', 'src/js/index.js'], ['js']);
+});
+
+gulp.task('removebuild', function() { return del.sync('build'); });
+gulp.task('clearcache', function () { return cache.clearAll(); });
 
 gulp.task('default', ['watch']);

@@ -15,11 +15,14 @@
     "gulp-clean-css": "^3.9.3",
     "gulp-concat": "^2.6.1",
     "gulp-notify": "^3.2.0",
-    "gulp-pug": "^3.3.0",
+    "gulp-pug": "^4.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-rsync": "0.0.8",
-    "gulp-sass": "^3.2.1",
+    "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8"
+  },
+  "dependencies": {
+    "npm": "^5.8.0"
   }
 }
