@@ -30,7 +30,7 @@ gulp.task('styles', function() {
   .pipe(sass({ outputStyle: 'expand' }).on("error", notify.onError()))
   .pipe(rename({ suffix: '.min', prefix : '' }))
   .pipe(autoprefixer(['last 15 versions']))
-  .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
+  // .pipe(cleancss( {level: { 1: { specialComments: 0 } } })) // Opt., comment out when debugging
   .pipe(gulp.dest('build/css'))
   .pipe(browsersync.reload( {stream: true} ))
 });
@@ -52,6 +52,18 @@ gulp.task('html', function() {
     pretty: true
   }))
   .pipe(gulp.dest('build'))
+  .pipe(browsersync.reload( {stream: true} ))
+});
+
+gulp.task('fonts', function() {
+  return gulp.src('src/fonts/**/*')
+  .pipe(gulp.dest('build/fonts'))
+  .pipe(browsersync.reload( {stream: true} ))
+});
+
+gulp.task('images', function() {
+  return gulp.src('src/img/**/*')
+  .pipe(gulp.dest('build/img'))
   .pipe(browsersync.reload( {stream: true} ))
 });
 
