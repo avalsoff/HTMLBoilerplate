@@ -1,12 +1,12 @@
 {
-  "name": "optimizedhtml",
-  "version": "4.1.0",
-  "description": "OptimizedHTML 4 - Start HTML Template",
+  "name": "htmlboilerplate",
+  "version": "2.1",
+  "description": "Start push + sass template",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "WebDesign Master",
+  "author": "avalsoff",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
