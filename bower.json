@@ -1,0 +1,23 @@
+{
+  "name": "htmlboilerplate",
+  "description": "Frontend start template with sass and pug",
+  "main": "index.js",
+  "authors": [
+    "avalsoff"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/avalsoff/HTMLBoilerplate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/libs/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.0",
+    "jQuery": "^3.3.1",
+    "font-awesome": "fontAwesome#^5.0.10"
+  }
+}
