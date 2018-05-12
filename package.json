@@ -1,11 +1,8 @@
 {
   "name": "htmlboilerplate",
-  "version": "2.4.0",
-  "description": "Frontend start template with sass and pug",
+  "version": "3.0.0",
+  "description": "Boilerplate for new static pages using SCSS, html with rigger, and pure js",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "avalsoff",
   "license": "ISC",
   "devDependencies": {
