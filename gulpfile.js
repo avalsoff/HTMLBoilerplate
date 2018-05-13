@@ -16,6 +16,7 @@ var webp = require("gulp-webp");
 var svgmin = require("gulp-svgmin");
 var svgstore = require("gulp-svgstore");
 var rigger = require("gulp-rigger");
+var concat = require("gulp-concat");
 var run = require("run-sequence");
 var del = require("del");
 // var ghPages = require("gulp-gh-pages");
@@ -62,8 +63,11 @@ gulp.task("js:del", function() {
 
 
 gulp.task("js", ["js:del"], function() {
-  gulp.src("src/js/*.js")
+  gulp.src([
+    "src/js/*.js" // At the end
+    ])
     .pipe(plumber())
+    .pipe(concat("index.min.js"))
     .pipe(uglify())
     .pipe(gulp.dest("build/js"))
     .pipe(server.stream());

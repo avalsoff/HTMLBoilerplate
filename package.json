@@ -1,6 +1,6 @@
 {
   "name": "htmlboilerplate",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Boilerplate for new static pages using SCSS, html with rigger, and pure js",
   "main": "index.js",
   "author": "avalsoff",
@@ -30,7 +30,7 @@
   "scripts": {
     "build": "gulp build",
     "start": "gulp"
-  }, 
+  },
   "browserslist": [
     "last 15 versions",
     "IE 11",
