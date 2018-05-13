@@ -1,3 +1,7 @@
-@import "variables";
-@import "fonts";
-@import "libraries";
+@import "global/variables";
+@import "global/fonts";
+@import "global/libraries";
+
+body {
+  background-color: blue;
+}
