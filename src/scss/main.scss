@@ -1,7 +1,25 @@
+@import "global/libraries";
+@import "global/mixins";
 @import "global/variables";
 @import "global/fonts";
-@import "global/libraries";
+@import "global/scaffolding";
 
-body {
-  background-color: blue;
-}
+/***Components***/
+@import "blocks/page";
+@import "blocks/button";
+@import "blocks/header-panel";
+@import "blocks/new";
+@import "blocks/review";
+@import "blocks/developed-by";
+
+/*****Sections*****/
+@import "blocks/main-nav";
+@import "blocks/logo";
+@import "blocks/feautures";
+@import "blocks/advantages";
+@import "blocks/flickity";
+@import "blocks/news";
+@import "blocks/reviews";
+@import "blocks/main-footer";
+
+@import "blocks/js-animations";

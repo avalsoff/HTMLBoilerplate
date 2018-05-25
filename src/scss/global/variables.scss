@@ -1,6 +1,15 @@
 // *********** Colors *************//
-$accent: orange;
+$accent: #826550;
 
-// *********** Fonts *************//
-$default: "roboto-example", Arial, sans-serif;
-$text: #fff;
+
+// *********** Text *************//
+$default: "roboto-example", Arial, Helvetica, sans-serif;
+
+// *********** Breakpoints *************//
+$w-small: 680px;
+$w-small-only: 679px;
+$w-large: 1010px;
+
+
+// *********** Container widths *************//
+$container-w-small: 640px;
