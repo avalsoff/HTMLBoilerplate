@@ -20,7 +20,8 @@ const inject         = require("gulp-inject");
 const injectPartials = require("gulp-inject-partials");
 const run            = require("run-sequence");
 const del            = require("del");
-var ghPages          = require("gulp-gh-pages");
+const ghPages        = require("gulp-gh-pages");
+const babel          = require("gulp-babel");
 
 // CLEAN BUILD
 
@@ -76,6 +77,9 @@ gulp.task("js", ["js:del"], function() {
   ])
   .pipe(plumber())
   .pipe(cncat("index.min.js"))
+  .pipe(babel({
+    presets: ['env']
+  }))
   .pipe(uglify())
   .pipe(gulp.dest("build/js"))
   .pipe(server.stream());
@@ -149,18 +153,18 @@ gulp.task("svg-sprite:del", function() {
 
 gulp.task("svg-sprite", ["svg-sprite:del"], function() {
   var svgs = gulp.src("src/img/svg/*.svg")
-      // .pipe(gulp.dest("build/img/svg-sprite"))
-      .pipe(svgmin())
-      .pipe(svgstore({
-        inlineSvg: true
-      }));
+  // .pipe(gulp.dest("build/img/svg-sprite"))
+  .pipe(svgmin())
+  .pipe(svgstore({
+    inlineSvg: true
+  }));
   
   gulp.src("build/index.html")
-      .pipe(inject(svgs, {transform: fileContents}))
-      .pipe(gulp.dest("build/"));
+  .pipe(inject(svgs, {transform: fileContents}))
+  .pipe(gulp.dest("build/"));
   
   svgs.pipe(rename("sprite.svg"))
-      .pipe(gulp.dest("build/img"));
+  .pipe(gulp.dest("build/img"));
   
 });
 
@@ -168,7 +172,7 @@ gulp.task("svg-sprite", ["svg-sprite:del"], function() {
 
 gulp.task("deploy", function() {
   return gulp.src("build/**/*")
-    .pipe(ghPages());
+  .pipe(ghPages());
 });
 
 // LIVE SERVER
